@@ -2,17 +2,17 @@
 
 struct integer;
 struct integer {
-	unsigned long int value;
-	struct integer (*add) (unsigned int);
+	long int value;
+	struct integer (*add) (int);
 	struct integer (*mul) (int);
 };
 
-struct integer adder(unsigned int);
+struct integer adder(int);
 struct integer multiplier(int);
 
 static struct integer integer_object;
 
-struct integer adder(unsigned int added_value) {
+struct integer adder(int added_value) {
 	integer_object.value += added_value;
 	return integer_object;
 }
@@ -25,8 +25,7 @@ struct integer multiplier(int mul_value) {
 int main(int arg, char * argv[]) {
 	integer_object.add = (void *) adder;
 	integer_object.mul = (void *) multiplier;
-	integer_object.add(21);
-	integer_object.mul(2);
-	printf("Integer result sum %lu\n", integer_object.value);
+	integer_object.add(10).mul(4).add(2);
+	printf("Answer is %li\n", integer_object.value);
 	return 0;
 }
